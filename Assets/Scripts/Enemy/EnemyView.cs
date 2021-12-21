@@ -3,6 +3,7 @@ using Ground;
 using TankServices;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 namespace EnemyServices
 {
@@ -13,14 +14,17 @@ namespace EnemyServices
         [HideInInspector] public bool detectPlayer;
         [HideInInspector] public EnemyStateEnum activeState;
         [HideInInspector] public float timer;
+        [SerializeField] private ParticleSystem explosionParticles;
         private Collider ground;
-        
+
         public Transform shootPoint;
         public EnemyController enemyController;
         public NavMeshAgent agent;
         public float patrolTime;
         public float followRadius;
         public float canFire;
+        public Slider healthSlider;
+        public Image fillImage;
         public MeshRenderer[] enemyChilds;
 
         public EnemyAttack attackState;
@@ -36,6 +40,7 @@ namespace EnemyServices
 
         private void Start()
         {
+            enemyController.setHealthUI();
             currentState = patrolState;
             InitializeState();
             setGround();
@@ -87,6 +92,13 @@ namespace EnemyServices
                     break;
             }
             currentState.OnStateEnter();
+        }
+
+        public void instantiateTankExplosionParticles()
+        {
+            ParticleSystem enemyTankExplosion = Instantiate(explosionParticles, transform.position, transform.rotation);
+            enemyTankExplosion.Play();
+            Destroy(enemyTankExplosion, 1f);
         }
 
         public void destroyView()

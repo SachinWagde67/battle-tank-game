@@ -9,7 +9,6 @@ namespace EnemySO
     public class EnemyScriptableObject : ScriptableObject
     {
         public EnemyView enemyView;
-        public BoxCollider ground;
         public float health;
         public float fireRate;
         public BulletScriptableObject bulletType;

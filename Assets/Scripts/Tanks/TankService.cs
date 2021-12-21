@@ -2,27 +2,31 @@
 using UnityEngine;
 using TankSO;
 using EnemyServices;
+using GamePlayServices;
 
 namespace TankServices
 {
     public class TankService : SingletonGeneric<TankService>
     {
-        public ScriptableObjectList tankList;
-        public TankScriptableObjects tankScriptableObjects { get; private set; }
-        //private List<TankController> tanks = new List<TankController>();
-        [HideInInspector] public Transform playerPos;
-        public TankView tankView { get; private set; }
         private TankController tankController;
-        private List<EnemyController> enemyControllers;
-
+        
+        public ScriptableObjectList tankList;
+        public Camera cam;
+        public TankScriptableObjects tankScriptableObjects { get; set; }
+        public TankView tankView { get; set; }
+        //private List<TankController> tanks = new List<TankController>();
+        
+        [HideInInspector] public Transform playerPos;
+        
         private void Start()
         {
             CreateNewTank();
+            tankController.setCameraReference(cam);
         }
 
         private TankController CreateNewTank()
         {
-            int random = Random.Range(0, tankList.tank.Length - 1);
+            int random = Random.Range(0, tankList.tank.Length);
             tankScriptableObjects = tankList.tank[random];
             tankView = tankScriptableObjects.tankView;
             TankModel tankModel = new TankModel(tankScriptableObjects);
@@ -44,23 +48,6 @@ namespace TankServices
         public Transform PlayerPos()
         {
             return playerPos;
-        }
-
-        public void destroyTank(TankController tank)
-        {
-            tank.destroyController();
-        }
-
-        public void destroyAllEnemies()
-        {
-            enemyControllers = EnemyService.Instance.enemies;
-            for (int i = 0; i < enemyControllers.Count; i++)
-            {
-                if(EnemyService.Instance.enemies[i].enemyView != null)
-                {
-                    enemyControllers[i].enemyDead();
-                }
-            }
         }
     }
 }

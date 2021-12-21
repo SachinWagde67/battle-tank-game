@@ -1,4 +1,5 @@
-﻿using BulletServices;
+﻿using AudioServices;
+using BulletServices;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -6,8 +7,8 @@ namespace EnemyServices
 {
     public class EnemyController
     {
-        public EnemyModel enemyModel { get; private set; }
-        public EnemyView enemyView { get; private set; }
+        public EnemyModel enemyModel { get; set; }
+        public EnemyView enemyView { get; set; }
 
         public EnemyController(EnemyModel model, EnemyView view, Vector3 pos)
         {
@@ -71,10 +72,20 @@ namespace EnemyServices
         public void applyDamage(float damage)
         {
             enemyModel.health -= damage;
+            setHealthUI();
             if(enemyModel.health <= 0)
             {
+                enemyView.instantiateTankExplosionParticles();
+                AudioManager.Instance.explosionAudio.GetComponent<AudioSource>().Play();
                 enemyDead();
             }
+        }
+
+        public void setHealthUI()
+        {
+            enemyView.healthSlider.maxValue = enemyModel.maxHealth;
+            enemyView.healthSlider.value = enemyModel.health;
+            enemyView.fillImage.color = Color.Lerp(enemyModel.zeroHealthColor, enemyModel.fullHealthColor, enemyModel.health / enemyModel.maxHealth);
         }
 
         public void enemyDead()

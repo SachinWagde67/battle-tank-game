@@ -4,18 +4,15 @@ using System.Collections;
 using System.Collections.Generic;
 using TankServices;
 using UnityEngine;
+using AudioServices;
 
 namespace BulletServices
 {
     public class BulletView : MonoBehaviour
     {
+        [SerializeField] private ParticleSystem shellExplosionParticles;
+        
         public BulletController bulletController { get; private set; }
-        public Rigidbody rb;
-
-        private void Awake()
-        {
-            rb = GetComponent<Rigidbody>();
-        }
 
         public void SetBulletController(BulletController _bulletController)
         {
@@ -24,15 +21,8 @@ namespace BulletServices
 
         private void FixedUpdate()
         {
-            BulletMove();
-        }
-
-        public void BulletMove()
-        {
-            Vector3 move = transform.position;
-            move += transform.forward * bulletController.bulletModel.Speed * Time.fixedDeltaTime;
-            rb.MovePosition(move);
-            Destroy(gameObject, 2f);
+            bulletController.BulletMove();
+            Destroy(gameObject,2f);
         }
 
         private void OnCollisionEnter(Collision other)
@@ -49,8 +39,13 @@ namespace BulletServices
             }
         }
 
+
         public void DestroyBullet()
         {
+            ParticleSystem shellExplosion = Instantiate(shellExplosionParticles, transform.position, transform.rotation);
+            shellExplosion.Play();
+            AudioManager.Instance.shellExplosionAudio.GetComponent<AudioSource>().Play();
+            Destroy(shellExplosion.gameObject, 1f);
             Destroy(gameObject);
         }
     }

@@ -10,13 +10,20 @@ namespace BulletServices
         public BulletView bulletView { get; private set; }
         private Rigidbody rb;
 
-        public BulletController(BulletModel model, BulletView bulletView, Vector3 position, Quaternion rotation)
+        public BulletController(BulletModel _model, BulletView _bulletView, Vector3 _position, Quaternion _rotation)
         {
-            bulletModel = model;
-            bulletView = GameObject.Instantiate<BulletView>(bulletView, position, rotation);
+            bulletModel = _model;
+            bulletView = GameObject.Instantiate<BulletView>(_bulletView, _position, _rotation);
             rb = bulletView.GetComponent<Rigidbody>();
             bulletView.SetBulletController(this);
             bulletModel.SetBulletController(this);
+        }
+
+        public void BulletMove()
+        {
+            Vector3 move = bulletView.transform.position;
+            move += bulletView.transform.forward * bulletModel.Speed * Time.fixedDeltaTime;
+            rb.MovePosition(move);
         }
     }
 }

@@ -110,7 +110,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf265caa7e80f7e4cb35295ed65b1914, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 4790917864446774654}
+  shellExplosionParticles: {fileID: 19807510, guid: 89e78efe92dfe5a42837b392cdb0bf9e,
+    type: 3}
 --- !u!136 &4790917864446774652
 CapsuleCollider:
   m_ObjectHideFlags: 0
