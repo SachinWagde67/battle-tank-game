@@ -8,9 +8,9 @@ namespace EnemyServices
     {
         public float fireRate { get; private set; }
         public BulletScriptableObject bulletType { get; private set; }
+        public Color enemyColor { get; private set; }
         
         public float health { get; set; }
-        
         public float maxHealth { get; }
         public Color fullHealthColor { get; }
         public Color zeroHealthColor { get; }
@@ -21,6 +21,7 @@ namespace EnemyServices
         {
             maxHealth = enemyScriptableObject.health;
             health = enemyScriptableObject.health;
+            enemyColor = enemyScriptableObject.enemyColor;
             fireRate = enemyScriptableObject.fireRate;
             bulletType = enemyScriptableObject.bulletType;
             fullHealthColor = Color.green;

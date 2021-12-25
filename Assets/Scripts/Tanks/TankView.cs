@@ -18,6 +18,7 @@ namespace TankServices
         private void Start()
         {
             tankController.setHealthUI();
+            setTankColor();
         }
 
         public void SetTankController(TankController _tankController)
@@ -28,7 +29,7 @@ namespace TankServices
         private void Update()
         {
             takeMoveInput();
-            ShootBullet();
+            ShootBullet();    
         }
 
         private void FixedUpdate()
@@ -59,6 +60,15 @@ namespace TankServices
                     canFire = tankController.tankModel.FireRate + Time.time;
                     tankController.Shoot();
                 }
+            }
+        }
+
+        public void setTankColor()
+        {
+            MeshRenderer[] renderers = gameObject.GetComponentsInChildren<MeshRenderer>();
+            for (int i = 0; i < renderers.Length; i++)
+            {
+                renderers[i].material.color = tankController.tankModel.TankColor;
             }
         }
 

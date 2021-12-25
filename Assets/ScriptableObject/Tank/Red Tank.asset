@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f062e920dea263844a7729050f61be63, type: 3}
   m_Name: Red Tank
   m_EditorClassIdentifier: 
-  tankView: {fileID: 4538877207795115179, guid: 5d73a9d0aba514948803917c47c8ccde,
+  tankView: {fileID: 4538877207795115179, guid: f02cec46946bec14a93effa1da5d5145,
     type: 3}
+  tankColor: {r: 1, g: 0.050980393, b: 0.12156863, a: 0}
   tankType: 1
   tankName: Red Tank
   movSpeed: 10
   rotSpeed: 120
-  health: 75
+  health: 150
   bulletType: {fileID: 11400000, guid: 838448d661116a843a10a8c1922472d8, type: 2}
   fireRate: 1

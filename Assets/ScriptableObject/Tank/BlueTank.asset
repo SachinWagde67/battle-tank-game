@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f062e920dea263844a7729050f61be63, type: 3}
   m_Name: BlueTank
   m_EditorClassIdentifier: 
-  tankView: {fileID: 4538877207795115179, guid: aaa4e4cbccf1662479d4ac8d8463435b,
+  tankView: {fileID: 4538877207795115179, guid: f02cec46946bec14a93effa1da5d5145,
     type: 3}
+  tankColor: {r: 0, g: 0.29411766, b: 0.65882355, a: 0}
   tankType: 2
   tankName: BlueTank
   movSpeed: 8

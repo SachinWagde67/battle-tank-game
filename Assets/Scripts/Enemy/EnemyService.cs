@@ -1,5 +1,8 @@
-﻿using EnemySO;
+﻿using Achievements;
+using EnemySO;
+using Events;
 using System.Collections.Generic;
+using TankServices;
 using UnityEngine;
 
 namespace EnemyServices
@@ -24,6 +27,7 @@ namespace EnemyServices
                 CreateNewEnemy(enemyPos[num], rand);
                 enemyPos.RemoveAt(num);
             }
+            SubscribeEvents();
         }
 
         private EnemyController CreateNewEnemy(Transform trans, int rand)
@@ -34,6 +38,20 @@ namespace EnemyServices
             enemyController = new EnemyController(model, enemyView, pos);
             enemies.Add(enemyController);
             return enemyController;
+        }
+
+        private void SubscribeEvents()
+        {
+            EventService.Instance.OnEnemiesKilled += updateEnemyKilled;
+        }
+
+        private void updateEnemyKilled()
+        {
+            if (TankService.Instance.getTankController().tankModel != null)
+            {
+                TankService.Instance.getTankController().tankModel.enemiesKilled += 1;
+                AchievementService.Instance.getAchievementController().CheckForEnemiesKilledAchievement();
+            }
         }
 
         public void destroyEnemyTank(EnemyController enemyController)

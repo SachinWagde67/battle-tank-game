@@ -11,10 +11,13 @@ namespace TankServices
         public float RotSpeed { get; private set; }
         public float MovSpeed { get; private set; }
         public float FireRate { get; private set; }
+        public Color TankColor { get; private set; }
         public TankType TankType { get; private set; }
         public BulletScriptableObject BulletType { get; private set; }
         
         public float Health { get; set; }
+        public int bulletsFired { get; set; }
+        public int enemiesKilled { get; set; }
         
         public float MaxHealth { get; }
         public Color FullHealthColor { get; }
@@ -29,8 +32,11 @@ namespace TankServices
             MaxHealth = tankScriptableObjects.health;
             BulletType = tankScriptableObjects.bulletType;
             FireRate = tankScriptableObjects.fireRate;
+            TankColor = tankScriptableObjects.tankColor;
             FullHealthColor = Color.green;
             ZeroHealthColor = Color.red;
+            bulletsFired = 0;
+            enemiesKilled = 0;
         }
 
         public void SetTankController(TankController _tankController)

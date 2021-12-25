@@ -2,6 +2,9 @@
 using UnityEngine;
 using GamePlayServices;
 using AudioServices;
+using Events;
+using System;
+using Achievements;
 
 namespace TankServices
 {
@@ -20,6 +23,7 @@ namespace TankServices
             rb = tankView.GetComponent<Rigidbody>();
             tankView.SetTankController(this);
             tankModel.SetTankController(this);
+            SubscribeEvents();
         }
 
         public void setCameraReference(Camera _cam)
@@ -65,6 +69,23 @@ namespace TankServices
         {
             AudioManager.Instance.shootingAudio.GetComponent<AudioSource>().Play();
             BulletService.Instance.CreateBullet(tankView.bulletShootPoint.position, tankView.transform.rotation, tankModel.BulletType);
+            EventService.Instance.invokeOnBulletsFired();
+        }
+
+        private void SubscribeEvents()
+        {
+            EventService.Instance.OnBulletsFired += updateBulletsFired;
+        }
+
+        private void updateBulletsFired()
+        {
+            tankModel.bulletsFired += 1;
+            AchievementService.Instance.getAchievementController().CheckForBulletsFiredAchievement();
+        }
+
+        private void UnsubscribeEvents()
+        {
+            EventService.Instance.OnBulletsFired -= updateBulletsFired;
         }
 
         public void destroyController()
@@ -74,6 +95,7 @@ namespace TankServices
             tankView.destroyView();
             tankModel = null;
             tankView = null;
+            UnsubscribeEvents();
         }
     }
 }

@@ -10,6 +10,7 @@ namespace TankSO
     public class TankScriptableObjects : ScriptableObject
     {
         public TankView tankView;
+        public Color tankColor;
         public TankType tankType;
         public string tankName;
         public float movSpeed;

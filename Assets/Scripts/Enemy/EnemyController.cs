@@ -1,6 +1,6 @@
 ﻿using AudioServices;
 using BulletServices;
-using JetBrains.Annotations;
+using Events;
 using UnityEngine;
 
 namespace EnemyServices
@@ -90,6 +90,7 @@ namespace EnemyServices
 
         public void enemyDead()
         {
+            EventService.Instance.invokeOnEnemiesKilled();
             EnemyService.Instance.destroyEnemyTank(this);
         }
 

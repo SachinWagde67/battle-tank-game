@@ -42,6 +42,7 @@ namespace EnemyServices
         {
             enemyController.setHealthUI();
             currentState = patrolState;
+            setEnemyTankColor();
             InitializeState();
             setGround();
             setPlayerTransform();
@@ -92,6 +93,15 @@ namespace EnemyServices
                     break;
             }
             currentState.OnStateEnter();
+        }
+
+        public void setEnemyTankColor()
+        {
+            MeshRenderer[] renderers = gameObject.GetComponentsInChildren<MeshRenderer>();
+            for (int i = 0; i < renderers.Length; i++)
+            {
+                renderers[i].material.color = enemyController.enemyModel.enemyColor;
+            }
         }
 
         public void instantiateTankExplosionParticles()
