@@ -23,7 +23,7 @@ namespace EnemyServices
             if(enemyView.playerTransform != null)
             {
                 float distance = Vector3.Distance(enemyView.transform.position, enemyView.playerTransform.position);
-                if(distance <= enemyView.followRadius)
+                if(distance <= enemyModel.followRadius)
                 {
                     Follow();
                 }
@@ -53,7 +53,7 @@ namespace EnemyServices
         public void Patrol()
         {
             enemyView.timer += Time.deltaTime;
-            if(enemyView.timer > enemyView.patrolTime)
+            if(enemyView.timer > enemyModel.patrolTime)
             {
                 Vector3 newDestination = GetRandomPos();
                 enemyView.agent.SetDestination(newDestination);

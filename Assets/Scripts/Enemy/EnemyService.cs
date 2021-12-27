@@ -1,8 +1,10 @@
 ﻿using Achievements;
 using EnemySO;
 using Events;
+using System.Collections;
 using System.Collections.Generic;
 using TankServices;
+using UI;
 using UnityEngine;
 
 namespace EnemyServices
@@ -13,21 +15,25 @@ namespace EnemyServices
         public List<Transform> enemyPos;
         public List<EnemyController> enemies = new List<EnemyController>();
         public EnemyController enemyController;
-        private int count;
+
         private int enemyCount;
 
         private void Start()
         {
-            enemyCount = enemyScriptableObject.Count;
+            spawnRandomEnemy();
+            SubscribeEvents();
+        }
+
+        private void spawnRandomEnemy()
+        {
+            enemyCount = Random.Range(3, enemyScriptableObject.Count + 1);
+
             for (int i = 0; i < enemyCount; i++)
             {
-                count = enemyPos.Count;
-                int num = Random.Range(0, count);
+                int num = Random.Range(0, enemyPos.Count);
                 int rand = Random.Range(0, enemyCount);
                 CreateNewEnemy(enemyPos[num], rand);
-                enemyPos.RemoveAt(num);
             }
-            SubscribeEvents();
         }
 
         private EnemyController CreateNewEnemy(Transform trans, int rand)
@@ -50,6 +56,7 @@ namespace EnemyServices
             if (TankService.Instance.getTankController().tankModel != null)
             {
                 TankService.Instance.getTankController().tankModel.enemiesKilled += 1;
+                enemyCount--;
                 AchievementService.Instance.getAchievementController().CheckForEnemiesKilledAchievement();
             }
         }
@@ -57,7 +64,18 @@ namespace EnemyServices
         public void destroyEnemyTank(EnemyController enemyController)
         {
             enemyController.destroyEnemyController();
+            
+            if (enemyCount == 0)
+            {
+                RespawnEnemy();
+            }
         }
 
+        private async void RespawnEnemy()
+        {
+            await new WaitForSeconds(4f);
+            UIManager.Instance.showWaves();
+            spawnRandomEnemy();
+        }
     }
 }

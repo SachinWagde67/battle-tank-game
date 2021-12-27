@@ -7,6 +7,8 @@ namespace EnemyServices
     public class EnemyModel 
     {
         public float fireRate { get; private set; }
+        public float followRadius { get; private set; }
+        public float patrolTime { get; private set; }
         public BulletScriptableObject bulletType { get; private set; }
         public Color enemyColor { get; private set; }
         
@@ -23,6 +25,8 @@ namespace EnemyServices
             health = enemyScriptableObject.health;
             enemyColor = enemyScriptableObject.enemyColor;
             fireRate = enemyScriptableObject.fireRate;
+            followRadius = enemyScriptableObject.followRadius;
+            patrolTime = enemyScriptableObject.patrolTime;
             bulletType = enemyScriptableObject.bulletType;
             fullHealthColor = Color.green;
             zeroHealthColor = Color.red;

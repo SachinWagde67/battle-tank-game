@@ -16,12 +16,11 @@ namespace EnemyServices
         [HideInInspector] public float timer;
         [SerializeField] private ParticleSystem explosionParticles;
         private Collider ground;
+        private ParticleSystem enemyTankExplosion;
 
         public Transform shootPoint;
         public EnemyController enemyController;
         public NavMeshAgent agent;
-        public float patrolTime;
-        public float followRadius;
         public float canFire;
         public Slider healthSlider;
         public Image fillImage;
@@ -106,9 +105,8 @@ namespace EnemyServices
 
         public void instantiateTankExplosionParticles()
         {
-            ParticleSystem enemyTankExplosion = Instantiate(explosionParticles, transform.position, transform.rotation);
+            enemyTankExplosion = Instantiate(explosionParticles, transform.position, transform.rotation);
             enemyTankExplosion.Play();
-            Destroy(enemyTankExplosion, 1f);
         }
 
         public void destroyView()
@@ -122,6 +120,7 @@ namespace EnemyServices
             agent = null;
             ground = null;
             playerTransform = null;
+            Destroy(enemyTankExplosion.gameObject, 2f);
             Destroy(this.gameObject);
         }
     }

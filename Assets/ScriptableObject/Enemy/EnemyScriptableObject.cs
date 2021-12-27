@@ -12,6 +12,8 @@ namespace EnemySO
         public Color enemyColor;
         public float health;
         public float fireRate;
+        public float followRadius;
+        public float patrolTime;
         public BulletScriptableObject bulletType;
     }
 }

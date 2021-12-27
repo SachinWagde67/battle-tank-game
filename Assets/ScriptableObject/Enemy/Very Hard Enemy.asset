@@ -17,4 +17,6 @@ MonoBehaviour:
   enemyColor: {r: 0.6431373, g: 0.0627451, b: 0.7176471, a: 0}
   health: 150
   fireRate: 2
+  followRadius: 40
+  patrolTime: 25
   bulletType: {fileID: 11400000, guid: 8ae8a2243b4bbf2408bda5a38e3af596, type: 2}

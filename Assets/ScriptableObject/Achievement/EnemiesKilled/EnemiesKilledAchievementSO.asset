@@ -22,6 +22,6 @@ MonoBehaviour:
     enemyKilledAchievementType: 2
     requirement: 15
   - achievementName: UNSTOPPABLE
-    achievementInfo: Kill 25 Enemies.
+    achievementInfo: Kill 30 Enemies.
     enemyKilledAchievementType: 3
-    requirement: 25
+    requirement: 30

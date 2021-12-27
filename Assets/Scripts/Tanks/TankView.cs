@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using AudioServices;
 
 namespace TankServices
 {
@@ -88,6 +87,7 @@ namespace TankServices
         {
             tankController = null;
             bulletShootPoint = null;
+            explosionParticles = null;
             Destroy(this.gameObject);
         }
     }

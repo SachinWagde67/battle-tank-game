@@ -57,7 +57,7 @@ namespace Achievements
 
         private void unlockAchievement(string achievement, string achievementInfo)
         {
-            UIManager.Instance.ShowAchievement(achievement, achievementInfo);
+            UIManager.Instance.showAchievement(achievement, achievementInfo);
         }
     }
 }

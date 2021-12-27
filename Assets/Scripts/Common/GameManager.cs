@@ -1,13 +1,10 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using TankServices;
+﻿using UnityEngine;
 using EnemyServices;
 
 namespace GamePlayServices
 {
     public class GameManager : SingletonGeneric<GameManager>
     {
-
         public void DestroyAllObjects()
         {
             destroyAllEnemies();

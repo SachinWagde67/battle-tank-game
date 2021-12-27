@@ -18,10 +18,10 @@ MonoBehaviour:
     bulletsFiredAchievementType: 1
     requirement: 10
   - achievementName: COMMANDO
-    achievementInfo: Shoot 20 Bullets.
+    achievementInfo: Shoot 25 Bullets.
     bulletsFiredAchievementType: 2
-    requirement: 20
+    requirement: 25
   - achievementName: WEAPON MASTER
-    achievementInfo: Shoot 30 Bullets.
+    achievementInfo: Shoot 50 Bullets.
     bulletsFiredAchievementType: 3
-    requirement: 30
+    requirement: 50
