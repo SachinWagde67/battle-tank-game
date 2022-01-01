@@ -77,7 +77,22 @@ namespace EnemyServices
             {
                 enemyView.instantiateTankExplosionParticles();
                 AudioManager.Instance.explosionAudio.GetComponent<AudioSource>().Play();
+                if(enemyModel.canDropHealth)
+                {
+                    destroyDropHealth();
+                }
                 enemyDead();
+            }
+        }
+
+        private async void destroyDropHealth()
+        {
+            GameObject healthObj =  enemyView.instantiateDropHealth();
+            await new WaitForSeconds(5f);
+
+            if (!EnemyDropHealth.isDestroyed)
+            {
+                EnemyDropHealth.destroyDropHealth(healthObj);
             }
         }
 

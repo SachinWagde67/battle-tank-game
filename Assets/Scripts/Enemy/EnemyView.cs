@@ -1,5 +1,6 @@
 ﻿using BattleTank;
 using Ground;
+using Interfaces;
 using TankServices;
 using UnityEngine;
 using UnityEngine.AI;
@@ -7,13 +8,14 @@ using UnityEngine.UI;
 
 namespace EnemyServices
 {
-    public class EnemyView : MonoBehaviour
+    public class EnemyView : MonoBehaviour, IDamagable
     {
         [HideInInspector] public float maxX, maxZ, minX, minZ;
         [HideInInspector] public Transform playerTransform;
         [HideInInspector] public bool detectPlayer;
         [HideInInspector] public EnemyStateEnum activeState;
         [HideInInspector] public float timer;
+        [HideInInspector] public GameObject dropHealth;
         [SerializeField] private ParticleSystem explosionParticles;
         private Collider ground;
         private ParticleSystem enemyTankExplosion;
@@ -25,6 +27,7 @@ namespace EnemyServices
         public Slider healthSlider;
         public Image fillImage;
         public MeshRenderer[] enemyChilds;
+        public GameObject dropHealthPrefab;
 
         public EnemyAttack attackState;
         public EnemyFollow followState;
@@ -47,6 +50,11 @@ namespace EnemyServices
             setPlayerTransform();
         }
 
+        private void Update()
+        {
+            enemyController.Move();
+        }
+
         private void setPlayerTransform()
         {
             playerTransform = TankService.Instance.PlayerPos();
@@ -64,11 +72,6 @@ namespace EnemyServices
         public void setEnemyController(EnemyController _enemyController)
         {
             enemyController = _enemyController;
-        }
-
-        private void Update()
-        {
-            enemyController.Move();
         }
 
         private void InitializeState()
@@ -109,6 +112,19 @@ namespace EnemyServices
             enemyTankExplosion.Play();
         }
 
+        public GameObject instantiateDropHealth()
+        {
+            Vector3 pos = transform.position;
+            dropHealth = Instantiate(dropHealthPrefab, new Vector3(pos.x, pos.y + 1.5f, pos.z), transform.rotation);
+            dropHealth.transform.parent = null;
+            return dropHealth;
+        }
+
+        public void TakeDamage(float damage)
+        {
+            enemyController.applyDamage(damage);
+        }
+
         public void destroyView()
         {
             for (int i = 0; i < enemyChilds.Length; i++)
@@ -119,8 +135,15 @@ namespace EnemyServices
             shootPoint = null;
             agent = null;
             ground = null;
+            dropHealth = null;
+            dropHealthPrefab = null;
             playerTransform = null;
-            Destroy(enemyTankExplosion.gameObject, 2f);
+         
+            if(TankService.Instance.getTankController().tankModel != null)
+            {
+                Destroy(enemyTankExplosion.gameObject, 0.5f);
+            }
+
             Destroy(this.gameObject);
         }
     }

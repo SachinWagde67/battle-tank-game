@@ -15,8 +15,9 @@ MonoBehaviour:
   enemyView: {fileID: 6903190947744424784, guid: 18797f77cdac58543972b6ae72d6393c,
     type: 3}
   enemyColor: {r: 0.6431373, g: 0.0627451, b: 0.7176471, a: 0}
-  health: 150
+  health: 125
   fireRate: 2
-  followRadius: 40
-  patrolTime: 25
+  followRadius: 20
+  patrolTime: 20
   bulletType: {fileID: 11400000, guid: 8ae8a2243b4bbf2408bda5a38e3af596, type: 2}
+  canDropHealth: 0

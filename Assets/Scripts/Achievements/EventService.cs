@@ -9,6 +9,7 @@ namespace Events
     {
         public event Action OnBulletsFired;
         public event Action OnEnemiesKilled;
+        public event Action OnWavesSurvived;
 
         public void invokeOnBulletsFired()
         {
@@ -18,6 +19,11 @@ namespace Events
         public void invokeOnEnemiesKilled()
         {
             OnEnemiesKilled?.Invoke();
+        }
+
+        public void invokeOnWavesSurvived()
+        {
+            OnWavesSurvived?.Invoke();
         }
     }
 }

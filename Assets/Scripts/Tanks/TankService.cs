@@ -9,9 +9,11 @@ namespace TankServices
         
         public ScriptableObjectList tankList;
         public Camera cam;
+        public Joystick tankMovementJoystick;
+        public Joystick turretRotateJoystick;
+        public bool playOnPC;
         public TankScriptableObjects tankScriptableObjects { get; set; }
         public TankView tankView { get; set; }
-        //private List<TankController> tanks = new List<TankController>();
         
         [HideInInspector] public Transform playerPos;
         
@@ -19,6 +21,7 @@ namespace TankServices
         {
             CreateNewTank();
             tankController.setCameraReference(cam);
+            setTankJoystick();
         }
 
         private TankController CreateNewTank()
@@ -28,8 +31,15 @@ namespace TankServices
             tankView = tankScriptableObjects.tankView;
             TankModel tankModel = new TankModel(tankScriptableObjects);
             tankController = new TankController(tankModel, tankView);
-            //tanks.Add(tankController);
             return tankController;
+        }
+
+        public void setTankJoystick()
+        {
+            if (tankController != null)
+            {
+                tankController.setJoysticks(tankMovementJoystick, turretRotateJoystick);
+            }
         }
 
         public TankController getTankController()

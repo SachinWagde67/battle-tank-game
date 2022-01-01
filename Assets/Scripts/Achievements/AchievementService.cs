@@ -9,6 +9,8 @@ namespace Achievements
     {
         public BulletsFiredAchievementScriptableObject bulletsFiredSO;
         public EnemiesKilledAchievementScriptableObject enemiesKilledSO;
+        public WavesSurvivedAchievementScriptableObject wavesSurvivedSO;
+
         private AchievementController achievementController;
 
         private void Start()
@@ -18,7 +20,7 @@ namespace Achievements
 
         private void CreateAchievement()
         {
-            AchievementModel model = new AchievementModel(bulletsFiredSO, enemiesKilledSO);
+            AchievementModel model = new AchievementModel(bulletsFiredSO, enemiesKilledSO, wavesSurvivedSO);
             achievementController = new AchievementController(model);
         }
 

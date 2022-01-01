@@ -9,11 +9,13 @@ namespace Achievements
 
         private int currentBulletsFiredAchievementLevel;
         private int currentEnemiesKilledAchievementLevel;
+        private int currentWavesSurvivedAchievementLevel;
 
         public AchievementController(AchievementModel model)
         {
             currentBulletsFiredAchievementLevel = 0;
             currentEnemiesKilledAchievementLevel = 0;
+            currentWavesSurvivedAchievementLevel = 0;
             achievementModel = model;
         }
 
@@ -50,6 +52,25 @@ namespace Achievements
                     string achievementInfo = achievementModel.enemiesKilledAchievementSO.achievements[i].achievementInfo;
                     unlockAchievement(achievement, achievementInfo);
                     currentEnemiesKilledAchievementLevel = i + 1;
+                }
+                break;
+            }
+        }
+
+        public void CheckForWavesSurvivedAchievement()
+        {
+            for (int i = 0; i < achievementModel.wavesSurvivedAchievementSO.achievements.Length; i++)
+            {
+                if (i != currentWavesSurvivedAchievementLevel)
+                {
+                    continue;
+                }
+                if (TankService.Instance.getTankController().tankModel.wavesSurvived == achievementModel.wavesSurvivedAchievementSO.achievements[i].requirement)
+                {
+                    string achievement = achievementModel.wavesSurvivedAchievementSO.achievements[i].achievementName;
+                    string achievementInfo = achievementModel.wavesSurvivedAchievementSO.achievements[i].achievementInfo;
+                    unlockAchievement(achievement, achievementInfo);
+                    currentWavesSurvivedAchievementLevel = i + 1;
                 }
                 break;
             }

@@ -12,6 +12,7 @@ namespace EnemyServices
         public BulletScriptableObject bulletType { get; private set; }
         public Color enemyColor { get; private set; }
         
+        public bool canDropHealth { get; set; }
         public float health { get; set; }
         public float maxHealth { get; }
         public Color fullHealthColor { get; }
@@ -28,6 +29,7 @@ namespace EnemyServices
             followRadius = enemyScriptableObject.followRadius;
             patrolTime = enemyScriptableObject.patrolTime;
             bulletType = enemyScriptableObject.bulletType;
+            canDropHealth = enemyScriptableObject.canDropHealth;
             fullHealthColor = Color.green;
             zeroHealthColor = Color.red;
         }

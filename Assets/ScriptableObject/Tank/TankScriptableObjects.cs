@@ -15,6 +15,7 @@ namespace TankSO
         public string tankName;
         public float movSpeed;
         public float rotSpeed;
+        public float turretRotSpeed;
         public float health;
         public BulletScriptableObject bulletType;
         public float fireRate;

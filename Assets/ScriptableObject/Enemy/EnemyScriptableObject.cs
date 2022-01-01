@@ -15,5 +15,6 @@ namespace EnemySO
         public float followRadius;
         public float patrolTime;
         public BulletScriptableObject bulletType;
+        public bool canDropHealth;
     }
 }

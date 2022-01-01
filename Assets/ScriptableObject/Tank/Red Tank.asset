@@ -17,8 +17,9 @@ MonoBehaviour:
   tankColor: {r: 1, g: 0.050980393, b: 0.12156863, a: 0}
   tankType: 1
   tankName: Red Tank
-  movSpeed: 10
+  movSpeed: 12
   rotSpeed: 120
+  turretRotSpeed: 120
   health: 150
   bulletType: {fileID: 11400000, guid: 838448d661116a843a10a8c1922472d8, type: 2}
   fireRate: 1

@@ -7,6 +7,7 @@ TagManager:
   - object
   - ground
   - EnemyTank
+  - health
   layers:
   - Default
   - TransparentFX

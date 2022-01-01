@@ -49,6 +49,7 @@ namespace EnemyServices
         private void SubscribeEvents()
         {
             EventService.Instance.OnEnemiesKilled += updateEnemyKilled;
+            EventService.Instance.OnWavesSurvived += updateWavesSurvived;
         }
 
         private void updateEnemyKilled()
@@ -58,6 +59,15 @@ namespace EnemyServices
                 TankService.Instance.getTankController().tankModel.enemiesKilled += 1;
                 enemyCount--;
                 AchievementService.Instance.getAchievementController().CheckForEnemiesKilledAchievement();
+            }
+        }
+
+        private void updateWavesSurvived()
+        {
+            if (TankService.Instance.getTankController().tankModel != null)
+            {
+                TankService.Instance.getTankController().tankModel.wavesSurvived += 1;
+                AchievementService.Instance.getAchievementController().CheckForWavesSurvivedAchievement();
             }
         }
 
@@ -75,6 +85,7 @@ namespace EnemyServices
         {
             await new WaitForSeconds(4f);
             UIManager.Instance.showWaves();
+            EventService.Instance.invokeOnWavesSurvived();
             spawnRandomEnemy();
         }
     }

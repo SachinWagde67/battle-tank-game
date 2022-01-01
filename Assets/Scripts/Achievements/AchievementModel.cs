@@ -8,11 +8,13 @@ namespace Achievements
     {
         public BulletsFiredAchievementScriptableObject bulletsFiredAchievementSO { get; private set; }
         public EnemiesKilledAchievementScriptableObject enemiesKilledAchievementSO { get; private set; }
+        public WavesSurvivedAchievementScriptableObject wavesSurvivedAchievementSO { get; private set; }
 
-        public AchievementModel(BulletsFiredAchievementScriptableObject bulletsFired, EnemiesKilledAchievementScriptableObject enemiesKilled)
+        public AchievementModel(BulletsFiredAchievementScriptableObject bulletsFired, EnemiesKilledAchievementScriptableObject enemiesKilled, WavesSurvivedAchievementScriptableObject wavesSurvived)
         {
             bulletsFiredAchievementSO = bulletsFired;
             enemiesKilledAchievementSO = enemiesKilled;
+            wavesSurvivedAchievementSO = wavesSurvived;
         }
     }
 }

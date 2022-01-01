@@ -10,7 +10,7 @@ namespace UI
         public TextMeshProUGUI achievementNameText;
         public TextMeshProUGUI achievementInfoText;
         public TextMeshProUGUI waveTxt;
-        private int waveNumber = 0;
+        private int waveNumber = 1;
 
         async public void showAchievement(string achievement, string achievementInfo)
         {
