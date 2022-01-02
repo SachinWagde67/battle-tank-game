@@ -36,7 +36,7 @@ namespace EnemyServices
 
         public void Follow()
         {
-            enemyView.transform.LookAt(enemyView.playerTransform);
+            enemyView.enemyTurret.transform.LookAt(enemyView.playerTransform);
             enemyView.agent.SetDestination(enemyView.playerTransform.position);
             shootBullet();
         }
@@ -46,7 +46,7 @@ namespace EnemyServices
             if(enemyView.canFire < Time.time)
             {
                 enemyView.canFire = enemyModel.fireRate + Time.time;
-                BulletService.Instance.CreateBullet(enemyView.shootPoint.position, enemyView.transform.rotation, enemyModel.bulletType);
+                BulletService.Instance.CreateBullet(enemyView.shootPoint.position, enemyView.enemyTurret.transform.rotation, enemyModel.bulletType);
             }
         }
 

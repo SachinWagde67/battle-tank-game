@@ -49,7 +49,6 @@ namespace TankServices
                 tankView.instantiateTankExplosionParticles();
                 AudioManager.Instance.explosionAudio.GetComponent<AudioSource>().Play();
                 destroyController();
-                GameManager.Instance.DestroyAllObjects();
             }
         }
 
@@ -144,6 +143,7 @@ namespace TankServices
             tankModel = null;
             tankView = null;
             UnsubscribeEvents();
+            GameManager.Instance.DestroyAllObjects();
         }
     }
 }

@@ -37,6 +37,10 @@ namespace BulletServices
                 other.gameObject.GetComponent<EnemyView>().TakeDamage(bulletController.bulletModel.Damage);
                 DestroyBullet();
             }
+            else if(other.gameObject.CompareTag("ground") || other.gameObject.CompareTag("object"))
+            {
+                DestroyBullet();
+            }
         }
 
 

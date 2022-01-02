@@ -10,7 +10,9 @@ namespace UI
         public TextMeshProUGUI achievementNameText;
         public TextMeshProUGUI achievementInfoText;
         public TextMeshProUGUI waveTxt;
+        public TextMeshProUGUI scoreTxt;
         private int waveNumber = 1;
+        private int scoreNumber = 0;
 
         async public void showAchievement(string achievement, string achievementInfo)
         {
@@ -22,10 +24,28 @@ namespace UI
             achievementPanel.SetActive(false);
         }
 
-        public void showWaves()
+        public async void showWaves()
         {
+            float fontSize = waveTxt.fontSize;
             waveNumber++;
-            waveTxt.text = "Waves : " + waveNumber;
+            await new WaitForSeconds(0.05f);
+            waveTxt.fontSize = fontSize * 1.3f;
+            await new WaitForSeconds(0.05f);
+            waveTxt.text = waveNumber.ToString();
+            await new WaitForSeconds(0.05f);
+            waveTxt.fontSize = fontSize;
+        }
+
+        public async void showScore()
+        {
+            float fontSize = scoreTxt.fontSize;
+            scoreNumber += 10;
+            await new WaitForSeconds(0.02f);
+            scoreTxt.fontSize = fontSize * 1.3f;
+            await new WaitForSeconds(0.02f);
+            scoreTxt.text = scoreNumber.ToString();
+            await new WaitForSeconds(0.02f);
+            scoreTxt.fontSize = fontSize;
         }
     }
 }

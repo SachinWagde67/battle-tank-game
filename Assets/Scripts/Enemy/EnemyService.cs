@@ -58,6 +58,7 @@ namespace EnemyServices
             {
                 TankService.Instance.getTankController().tankModel.enemiesKilled += 1;
                 enemyCount--;
+                UIManager.Instance.showScore();
                 AchievementService.Instance.getAchievementController().CheckForEnemiesKilledAchievement();
             }
         }
@@ -83,8 +84,9 @@ namespace EnemyServices
 
         private async void RespawnEnemy()
         {
-            await new WaitForSeconds(4f);
+            await new WaitForSeconds(3f);
             UIManager.Instance.showWaves();
+            await new WaitForSeconds(3f);
             EventService.Instance.invokeOnWavesSurvived();
             spawnRandomEnemy();
         }

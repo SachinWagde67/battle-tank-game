@@ -21,6 +21,7 @@ namespace EnemyServices
         private ParticleSystem enemyTankExplosion;
 
         public Transform shootPoint;
+        public GameObject enemyTurret;
         public EnemyController enemyController;
         public NavMeshAgent agent;
         public float canFire;
