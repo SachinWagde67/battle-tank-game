@@ -23,10 +23,6 @@ namespace Achievements
         {
             for (int i = 0; i < achievementModel.bulletsFiredAchievementSO.achievements.Length; i++)
             {
-                if(i != currentBulletsFiredAchievementLevel)
-                {
-                    continue;
-                }
                 if(TankService.Instance.getTankController().tankModel.bulletsFired == achievementModel.bulletsFiredAchievementSO.achievements[i].requirement)
                 {
                     string achievement = achievementModel.bulletsFiredAchievementSO.achievements[i].achievementName;
@@ -42,10 +38,6 @@ namespace Achievements
         {
             for (int i = 0; i < achievementModel.enemiesKilledAchievementSO.achievements.Length; i++)
             {
-                if (i != currentEnemiesKilledAchievementLevel)
-                {
-                    continue;
-                }
                 if (TankService.Instance.getTankController().tankModel.enemiesKilled == achievementModel.enemiesKilledAchievementSO.achievements[i].requirement)
                 {
                     string achievement = achievementModel.enemiesKilledAchievementSO.achievements[i].achievementName;
@@ -61,10 +53,6 @@ namespace Achievements
         {
             for (int i = 0; i < achievementModel.wavesSurvivedAchievementSO.achievements.Length; i++)
             {
-                if (i != currentWavesSurvivedAchievementLevel)
-                {
-                    continue;
-                }
                 if (TankService.Instance.getTankController().tankModel.wavesSurvived == achievementModel.wavesSurvivedAchievementSO.achievements[i].requirement)
                 {
                     string achievement = achievementModel.wavesSurvivedAchievementSO.achievements[i].achievementName;

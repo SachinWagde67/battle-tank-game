@@ -30,7 +30,6 @@ namespace EnemyServices
         public MeshRenderer[] enemyChilds;
         public GameObject dropHealthPrefab;
 
-        public EnemyAttack attackState;
         public EnemyFollow followState;
         public EnemyPatrol patrolState;
         public EnemyStateEnum initialState;
@@ -85,10 +84,6 @@ namespace EnemyServices
 
                 case EnemyStateEnum.Patrol:
                     currentState = patrolState;
-                    break;
-
-                case EnemyStateEnum.Attack:
-                    currentState = attackState;
                     break;
 
                 default:

@@ -405,7 +405,6 @@ GameObject:
   - component: {fileID: 6903190947744424785}
   - component: {fileID: 6903190947744424784}
   - component: {fileID: -5602918264710624030}
-  - component: {fileID: 1369228258942935533}
   - component: {fileID: 2266753927288590173}
   - component: {fileID: -1033450581810828046}
   - component: {fileID: 4247508399080932051}
@@ -498,7 +497,7 @@ MonoBehaviour:
   - {fileID: 6699090309036164651}
   dropHealthPrefab: {fileID: 7229236561622884965, guid: b84887082e38307448e813c00bb47017,
     type: 3}
-  attackState: {fileID: 1369228258942935533}
+  attackState: {fileID: 0}
   followState: {fileID: 2266753927288590173}
   patrolState: {fileID: -1033450581810828046}
   initialState: 2
@@ -525,19 +524,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
---- !u!114 &1369228258942935533
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6699090309038365017}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91c705b629a589543a6b3b540d6223d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyView: {fileID: 6903190947744424784}
 --- !u!114 &2266753927288590173
 MonoBehaviour:
   m_ObjectHideFlags: 0
