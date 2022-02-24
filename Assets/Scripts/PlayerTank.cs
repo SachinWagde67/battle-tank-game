@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlayerTank : SingletonGeneric<PlayerTank>
 {
-    [SerializeField] private Joystick joystick;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float turnSpeed;
     [SerializeField] private Rigidbody rb;
+    private Joystick joystick;
 
     private void Start()
     {

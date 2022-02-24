@@ -1,25 +1,35 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BulletServices;
+using TankSO;
 
-public class TankService : SingletonGeneric<TankService>
+namespace TankServices
 {
-    public TankView tankView;
-
-    private void Start()
+    public class TankService : SingletonGeneric<TankService>
     {
-        StartGame();
-    }
+        public ScriptableObjectList tankList;
+        public TankView tankView;
 
-    private void StartGame()
-    {
-        CreateNewTank();
-    }
+        public BulletService BulletService { get; private set; }
 
-    private TankController CreateNewTank()
-    {
-        TankModel tankModel = new TankModel(5, 100f);
-        TankController tank = new TankController(tankModel, tankView);
-        return tank;
+        private void Start()
+        {
+            CreateNewTank();
+        }
+
+        public void GetBulletService()
+        {
+            BulletService = BulletService.GetComponent<BulletService>();
+        }
+
+        private TankController CreateNewTank()
+        {
+            int random = Random.Range(0, tankList.tank.Length - 1);
+            TankScriptableObjects tankScriptableObjects = tankList.tank[random];
+            TankModel tankModel = new TankModel(tankScriptableObjects);
+            TankController tank = new TankController(tankModel, tankView);
+            return tank;
+        }
     }
 }
