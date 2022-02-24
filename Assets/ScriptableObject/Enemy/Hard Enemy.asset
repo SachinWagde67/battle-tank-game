@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c72c590b656805439ffae0c7538c570, type: 3}
   m_Name: Hard Enemy
   m_EditorClassIdentifier: 
-  enemyView: {fileID: 6903190947744424784, guid: 9201c41b2fc296d42b009e362cdd953e,
+  enemyView: {fileID: 6903190947744424784, guid: 18797f77cdac58543972b6ae72d6393c,
     type: 3}
+  enemyColor: {r: 0.6431373, g: 0.0627451, b: 0.7176471, a: 0}
   health: 100
   fireRate: 2
+  followRadius: 20
+  patrolTime: 20
   bulletType: {fileID: 11400000, guid: 8ae8a2243b4bbf2408bda5a38e3af596, type: 2}
+  canDropHealth: 1

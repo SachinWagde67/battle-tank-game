@@ -1,13 +1,10 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using TankServices;
+﻿using UnityEngine;
 using EnemyServices;
 
 namespace GamePlayServices
 {
     public class GameManager : SingletonGeneric<GameManager>
     {
-
         public void DestroyAllObjects()
         {
             destroyAllEnemies();
@@ -22,7 +19,7 @@ namespace GamePlayServices
             GameObject[] enemies = GameObject.FindGameObjectsWithTag("EnemyTank");
             for (int i = 0; i < enemies.Length; i++)
             {
-                if (EnemyService.Instance.enemies[i].enemyView != null)
+                if (enemies[i] != null)
                 {
                     enemies[i].GetComponent<EnemyView>().enemyController.enemyDead();
                     await new WaitForSeconds(0.2f);
@@ -32,7 +29,7 @@ namespace GamePlayServices
 
         private async void destroyObjects()
         {
-            await new WaitForSeconds(3f);
+            await new WaitForSeconds(3.5f);
 
             GameObject[] objects = GameObject.FindGameObjectsWithTag("object");
 

@@ -1,6 +1,6 @@
 ﻿using AudioServices;
 using BulletServices;
-using JetBrains.Annotations;
+using Events;
 using UnityEngine;
 
 namespace EnemyServices
@@ -23,7 +23,7 @@ namespace EnemyServices
             if(enemyView.playerTransform != null)
             {
                 float distance = Vector3.Distance(enemyView.transform.position, enemyView.playerTransform.position);
-                if(distance <= enemyView.followRadius)
+                if(distance <= enemyModel.followRadius)
                 {
                     Follow();
                 }
@@ -36,7 +36,7 @@ namespace EnemyServices
 
         public void Follow()
         {
-            enemyView.transform.LookAt(enemyView.playerTransform);
+            enemyView.enemyTurret.transform.LookAt(enemyView.playerTransform);
             enemyView.agent.SetDestination(enemyView.playerTransform.position);
             shootBullet();
         }
@@ -46,14 +46,14 @@ namespace EnemyServices
             if(enemyView.canFire < Time.time)
             {
                 enemyView.canFire = enemyModel.fireRate + Time.time;
-                BulletService.Instance.CreateBullet(enemyView.shootPoint.position, enemyView.transform.rotation, enemyModel.bulletType);
+                BulletService.Instance.CreateBullet(enemyView.shootPoint.position, enemyView.enemyTurret.transform.rotation, enemyModel.bulletType);
             }
         }
 
         public void Patrol()
         {
             enemyView.timer += Time.deltaTime;
-            if(enemyView.timer > enemyView.patrolTime)
+            if(enemyView.timer > enemyModel.patrolTime)
             {
                 Vector3 newDestination = GetRandomPos();
                 enemyView.agent.SetDestination(newDestination);
@@ -77,7 +77,22 @@ namespace EnemyServices
             {
                 enemyView.instantiateTankExplosionParticles();
                 AudioManager.Instance.explosionAudio.GetComponent<AudioSource>().Play();
+                if(enemyModel.canDropHealth)
+                {
+                    destroyDropHealth();
+                }
                 enemyDead();
+            }
+        }
+
+        private async void destroyDropHealth()
+        {
+            GameObject healthObj =  enemyView.instantiateDropHealth();
+            await new WaitForSeconds(5f);
+
+            if (!EnemyDropHealth.isDestroyed)
+            {
+                EnemyDropHealth.destroyDropHealth(healthObj);
             }
         }
 
@@ -90,6 +105,7 @@ namespace EnemyServices
 
         public void enemyDead()
         {
+            EventService.Instance.invokeOnEnemiesKilled();
             EnemyService.Instance.destroyEnemyTank(this);
         }
 

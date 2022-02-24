@@ -28,13 +28,17 @@ namespace BulletServices
         private void OnCollisionEnter(Collision other)
         {
             if(bulletController.bulletModel.bulletType == BulletType.Enemy && other.gameObject.GetComponent<TankView>() != null)
-            {
-                TankService.Instance.getTankController().applyDamage(bulletController.bulletModel.Damage);
+            { 
+                other.gameObject.GetComponent<TankView>().TakeDamage(bulletController.bulletModel.Damage);
                 DestroyBullet();
             }
             else if(bulletController.bulletModel.bulletType != BulletType.Enemy && other.gameObject.GetComponent<EnemyView>() != null)
             {
-                other.gameObject.GetComponent<EnemyView>().enemyController.applyDamage(bulletController.bulletModel.Damage);
+                other.gameObject.GetComponent<EnemyView>().TakeDamage(bulletController.bulletModel.Damage);
+                DestroyBullet();
+            }
+            else if(other.gameObject.CompareTag("ground") || other.gameObject.CompareTag("object"))
+            {
                 DestroyBullet();
             }
         }
