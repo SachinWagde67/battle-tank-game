@@ -1,29 +1,30 @@
-﻿using BulletServices;
-using BulletSO;
+﻿using BulletSO;
 using EnemySO;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace EnemyServices
 {
     public class EnemyModel 
     {
-        public EnemyType enemyType { get; private set; }
-        public float health { get; private set; }
-        public float moveSpeed { get; private set; }
-        public float rotateSpeed { get; private set; }
+        public float fireRate { get; private set; }
         public BulletScriptableObject bulletType { get; private set; }
+        
+        public float health { get; set; }
+        
+        public float maxHealth { get; }
+        public Color fullHealthColor { get; }
+        public Color zeroHealthColor { get; }
 
         private EnemyController enemyController;
 
         public EnemyModel(EnemyScriptableObject enemyScriptableObject)
         {
-            enemyType = enemyScriptableObject.enemyType;
+            maxHealth = enemyScriptableObject.health;
             health = enemyScriptableObject.health;
-            moveSpeed = enemyScriptableObject.moveSpeed;
-            rotateSpeed = enemyScriptableObject.rotateSpeed;
+            fireRate = enemyScriptableObject.fireRate;
             bulletType = enemyScriptableObject.bulletType;
+            fullHealthColor = Color.green;
+            zeroHealthColor = Color.red;
         }
 
         public void setEnemyController(EnemyController _enemyController)
@@ -31,5 +32,10 @@ namespace EnemyServices
             enemyController = _enemyController;
         }
 
+        public void destroyModel()
+        {
+            bulletType = null;
+            enemyController = null;
+        }
     }
 }

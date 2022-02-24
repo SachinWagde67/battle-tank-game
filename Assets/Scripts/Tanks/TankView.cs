@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UIElements;
-using BulletServices;
+﻿using UnityEngine;
+using UnityEngine.UI;
+using AudioServices;
 
 namespace TankServices
 {
@@ -10,39 +8,43 @@ namespace TankServices
     {
         private TankController tankController;
         private float movement, rotation;
-        private Rigidbody rb;
-        public Transform bulletShootPoint;
+        [SerializeField] private ParticleSystem explosionParticles;
+        [SerializeField] private float canFire;
 
-        private void Awake()
+        public Transform bulletShootPoint;
+        public Slider healthSlider;
+        public Image fillImage;
+
+        private void Start()
         {
-            rb = GetComponent<Rigidbody>();
+            tankController.setHealthUI();
         }
 
-        public void SetTankController(TankController tankControl)
+        public void SetTankController(TankController _tankController)
         {
-            tankController = tankControl;
+            tankController = _tankController;
         }
 
         private void Update()
         {
-            Move();
+            takeMoveInput();
             ShootBullet();
         }
 
         private void FixedUpdate()
         {
-            //tankController.Move(movement, tankController.TankModel.MovSpeed);
-            //tankController.Rotate(rotation, tankController.TankModel.RotSpeed);
-
-            Vector3 move = transform.forward * movement * tankController.tankModel.MovSpeed * Time.deltaTime;
-            rb.MovePosition(rb.position + move);
-
-            float rotate = rotation * tankController.tankModel.RotSpeed * Time.deltaTime;
-            Quaternion turn = Quaternion.Euler(0f, rotate, 0f);
-            rb.MoveRotation(rb.rotation * turn);
+            if(movement != 0)
+            {
+                tankController.Move(movement, tankController.tankModel.MovSpeed);
+            }
+            if (rotation != 0)
+            {
+                tankController.Rotate(rotation, tankController.tankModel.RotSpeed);
+            }
+            TankService.Instance.getPlayerPos(transform);
         }
 
-        private void Move()
+        private void takeMoveInput()
         {
             movement = Input.GetAxis("Vertical");
             rotation = Input.GetAxis("Horizontal");
@@ -52,13 +54,31 @@ namespace TankServices
         {
             if (Input.GetButtonDown("Fire1"))
             {
-                Shoot();
+                if (canFire < Time.time)
+                {
+                    canFire = tankController.tankModel.FireRate + Time.time;
+                    tankController.Shoot();
+                }
             }
         }
 
-        public void Shoot()
+        public void instantiateTankExplosionParticles()
         {
-            BulletService.Instance.CreateBullet(bulletShootPoint.position, transform.rotation, tankController.tankModel.BulletType);
+            ParticleSystem tankExplosion = Instantiate(explosionParticles, transform.position, transform.rotation);
+            tankExplosion.Play();
+            Destroy(tankExplosion, 1f);
+        }
+
+        public void destroyObject(GameObject _explosionPrefab)
+        {
+            Destroy(_explosionPrefab);
+        }
+
+        public void destroyView()
+        {
+            tankController = null;
+            bulletShootPoint = null;
+            Destroy(this.gameObject);
         }
     }
 }

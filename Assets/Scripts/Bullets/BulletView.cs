@@ -1,19 +1,18 @@
-﻿using System;
+﻿using EnemyServices;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TankServices;
 using UnityEngine;
+using AudioServices;
 
 namespace BulletServices
 {
     public class BulletView : MonoBehaviour
     {
+        [SerializeField] private ParticleSystem shellExplosionParticles;
+        
         public BulletController bulletController { get; private set; }
-        public Rigidbody rb;
-
-        private void Awake()
-        {
-            rb = GetComponent<Rigidbody>();
-        }
 
         public void SetBulletController(BulletController _bulletController)
         {
@@ -22,20 +21,32 @@ namespace BulletServices
 
         private void FixedUpdate()
         {
-            BulletMove();
+            bulletController.BulletMove();
+            Destroy(gameObject,2f);
         }
 
-        public void BulletMove()
+        private void OnCollisionEnter(Collision other)
         {
-            Vector3 move = transform.position;
-            move += transform.forward * bulletController.bulletModel.Speed * Time.fixedDeltaTime;
-            rb.MovePosition(move);
-            DestroyBullet();
+            if(bulletController.bulletModel.bulletType == BulletType.Enemy && other.gameObject.GetComponent<TankView>() != null)
+            {
+                TankService.Instance.getTankController().applyDamage(bulletController.bulletModel.Damage);
+                DestroyBullet();
+            }
+            else if(bulletController.bulletModel.bulletType != BulletType.Enemy && other.gameObject.GetComponent<EnemyView>() != null)
+            {
+                other.gameObject.GetComponent<EnemyView>().enemyController.applyDamage(bulletController.bulletModel.Damage);
+                DestroyBullet();
+            }
         }
+
 
         public void DestroyBullet()
         {
-            Destroy(gameObject, 2f);
+            ParticleSystem shellExplosion = Instantiate(shellExplosionParticles, transform.position, transform.rotation);
+            shellExplosion.Play();
+            AudioManager.Instance.shellExplosionAudio.GetComponent<AudioSource>().Play();
+            Destroy(shellExplosion.gameObject, 1f);
+            Destroy(gameObject);
         }
     }
 }
