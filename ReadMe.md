@@ -1,4 +1,4 @@
-# Unity-3D-Battle-Tank-Game
+# Unity 3D Battle Tank Game
 
 A 3D Battle Tank Game built using Unity. The main aim of this game is to defeat all the enemy tanks who are trying to shoot the player tank and win the game.
 
