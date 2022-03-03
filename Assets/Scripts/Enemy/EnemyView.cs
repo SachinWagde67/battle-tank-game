@@ -19,6 +19,8 @@ namespace EnemyServices
         [SerializeField] private ParticleSystem explosionParticles;
         private Collider ground;
         private ParticleSystem enemyTankExplosion;
+        private EnemyFollow followState;
+        private EnemyPatrol patrolState;
 
         public Transform shootPoint;
         public GameObject enemyTurret;
@@ -30,9 +32,6 @@ namespace EnemyServices
         public MeshRenderer[] enemyChilds;
         public GameObject dropHealthPrefab;
 
-        public EnemyFollow followState;
-        public EnemyPatrol patrolState;
-        public EnemyStateEnum initialState;
         public EnemyState currentState;
 
         private void Awake()
@@ -43,9 +42,7 @@ namespace EnemyServices
         private void Start()
         {
             enemyController.setHealthUI();
-            currentState = patrolState;
             setEnemyTankColor();
-            InitializeState();
             setGround();
             setPlayerTransform();
         }
@@ -74,7 +71,7 @@ namespace EnemyServices
             enemyController = _enemyController;
         }
 
-        private void InitializeState()
+        public void InitializeState(EnemyStateEnum initialState)
         {
             switch (initialState)
             {

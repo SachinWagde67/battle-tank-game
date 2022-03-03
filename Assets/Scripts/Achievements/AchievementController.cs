@@ -21,7 +21,7 @@ namespace Achievements
 
         public void CheckForBulletsFiredAchievement()
         {
-            for (int i = 0; i < achievementModel.bulletsFiredAchievementSO.achievements.Length; i++)
+            for (int i = 0; i < achievementModel.bulletsFiredAchievementSO.achievements.Length;)
             {
                 if(TankService.Instance.getTankController().tankModel.bulletsFired == achievementModel.bulletsFiredAchievementSO.achievements[i].requirement)
                 {
@@ -36,7 +36,7 @@ namespace Achievements
 
         public void CheckForEnemiesKilledAchievement()
         {
-            for (int i = 0; i < achievementModel.enemiesKilledAchievementSO.achievements.Length; i++)
+            for (int i = 0; i < achievementModel.enemiesKilledAchievementSO.achievements.Length;)
             {
                 if (TankService.Instance.getTankController().tankModel.enemiesKilled == achievementModel.enemiesKilledAchievementSO.achievements[i].requirement)
                 {
@@ -51,7 +51,7 @@ namespace Achievements
 
         public void CheckForWavesSurvivedAchievement()
         {
-            for (int i = 0; i < achievementModel.wavesSurvivedAchievementSO.achievements.Length; i++)
+            for (int i = 0; i < achievementModel.wavesSurvivedAchievementSO.achievements.Length;)
             {
                 if (TankService.Instance.getTankController().tankModel.wavesSurvived == achievementModel.wavesSurvivedAchievementSO.achievements[i].requirement)
                 {

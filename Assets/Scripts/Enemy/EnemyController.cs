@@ -1,4 +1,5 @@
 ﻿using AudioServices;
+using BattleTank;
 using BulletServices;
 using Events;
 using UnityEngine;
@@ -25,11 +26,13 @@ namespace EnemyServices
                 float distance = Vector3.Distance(enemyView.transform.position, enemyView.playerTransform.position);
                 if(distance <= enemyModel.followRadius)
                 {
+                    //enemyView.InitializeState(EnemyStateEnum.Follow);
                     Follow();
                 }
                 else
                 {
                     Patrol();
+                    //enemyView.InitializeState(EnemyStateEnum.Patrol);
                 }
             }
         }

@@ -6,7 +6,7 @@ namespace TankServices
     public class TankService : SingletonGeneric<TankService>
     {
         private TankController tankController;
-        
+       
         public ScriptableObjectList tankList;
         public Camera cam;
         public Joystick tankMovementJoystick;
