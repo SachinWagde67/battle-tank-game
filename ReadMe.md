@@ -12,3 +12,9 @@ A 3D Battle Tank Game built using Unity. The main aim of this game is to defeat 
 - Used a State Pattern for the Enemy States like Patrolling, Following, Idle, and Attacking.
 - Worked with Observer pattern for making the Achievement System.
 - Added Enemy Waves which will spawn enemy tanks randomly.
+
+
+![](Images/1.png)
+![](Images/2.png)
+![](Images/3.png)
+![](Images/4.png)
